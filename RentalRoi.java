@@ -53,4 +53,20 @@ public class RentalRoi {
 		}
 		return recursionCalcRefined(principal, amount + rent * 12d, rent, interest, months + 12);
 	}
+   /* Using Compouding*/   
+   static double usingCompounding(double principal, double rent, double interest) {
+		double years = 1;
+		double amount = rent * 12d;
+		double thatRent = rent;
+		while (amount <= principal) {
+			amount = amount + (rent * 12d) * Math.pow(1 + interest, years);
+			thatRent = thatRent + interest * thatRent;
+			years++;
+			System.out.println("amount = " + amount + " thatRent=" + thatRent);
+		}
+		double diff = amount - principal;
+		thatRent = thatRent / (1 + interest);
+		years = years - (diff / thatRent) / 12;
+		return years;
+	}
 }
